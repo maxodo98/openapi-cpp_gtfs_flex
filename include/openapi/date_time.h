@@ -30,6 +30,8 @@ struct offset_time {
 
 using date_time_t = offset_time;
 
+extern std::optional<date_time_t> now_test;
+
 date_time_t now();
 
 void parse(std::string_view, date_time_t&);

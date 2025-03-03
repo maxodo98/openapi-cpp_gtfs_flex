@@ -9,6 +9,8 @@
 
 namespace openapi {
 
+std::optional<date_time_t> now_test = std::nullopt;
+
 std::ostream& operator<<(std::ostream& out, date_time_t const& t) {
   utl::verify(t.offset_ == std::chrono::minutes{0}, "offset not supported yet");
   out << date::format("%FT%TZ", t.time_);
@@ -16,6 +18,9 @@ std::ostream& operator<<(std::ostream& out, date_time_t const& t) {
 }
 
 date_time_t now() {
+  if (now_test.has_value()) {
+    return now_test.value();
+  }
   return std::chrono::time_point_cast<std::chrono::seconds>(
       std::chrono::system_clock::now());
 }
